@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.fisco.bcos.key.mgr.keyescrow.KeyEscrowMapper">
+  <resultMap id="keyEscrowMap" type="org.fisco.bcos.key.mgr.keyescrow.entity.TbPKeyInfo">
+    <id column="account" javaType="java.lang.String" jdbcType="VARCHAR" property="account"/>
+    <id column="key_alias" javaType="java.lang.String" jdbcType="VARCHAR" property="keyAlias"/>
+    <result column="cipher_text" javaType="java.lang.String" jdbcType="VARCHAR" property="cipherText"/>
+    <result column="private_key" javaType="java.lang.String" jdbcType="VARCHAR" property="privateKey"/>
+    <result column="create_time" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP" property="createTime"/>
+  </resultMap>
+
+  <sql id="ROW_COLUMN">
+    account,key_alias,cipher_text,private_key,create_time
+  </sql>
+
+  <insert id="addKeyRow" parameterType="org.fisco.bcos.key.mgr.keyescrow.entity.TbPKeyInfo">
+    insert into tb_key_info
+    (<include refid="ROW_COLUMN"/>)
+    values(#{account},#{keyAlias},#{cipherText},#{privateKey},NOW())
+  </insert>
+
+  <select id="queryByAccountWithKey" resultMap="keyEscrowMap">
+    select
+    <include refid="ROW_COLUMN"/>
+    from tb_key_info where BINARY account = #{account} and key_alias = #{keyAlias}
+    limit 1
+  </select>
+
+  <delete id="deleteKeyRow" parameterType="java.lang.String">
+    delete from tb_key_info where BINARY account = #{account} and key_alias = #{keyAlias}
+  </delete>
+
+  <select id="countOfAccountWithKey" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1) from tb_key_info where BINARY account = #{account} and key_alias = #{keyAlias}
+  </select>
+
+  <select id="countOfKeyByAccount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1) from tb_key_info where 1=1
+    <if test="account != null and account != ''">
+      and BINARY account = #{account}
+    </if>
+  </select>
+
+  <select id="listOfKeyByAccount" parameterType="org.fisco.bcos.key.mgr.keyescrow.entity.KeyListParam" resultMap="keyEscrowMap">
+    select * from tb_key_info
+    where 1=1
+    <if test="param.account != null and param.account != ''">
+      and BINARY account = #{param.account}
+    </if>
+    <if test="param.flagSortedByTime != null and param.flagSortedByTime != ''">
+      order by create_time ${param.flagSortedByTime}
+    </if>
+    <if test="param.start != null and param.pageSize != null">
+      limit #{param.start},#{param.pageSize}
+    </if>
+  </select>
+
+</mapper>

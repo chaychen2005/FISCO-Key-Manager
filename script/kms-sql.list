@@ -1,0 +1,4 @@
+#!/bin/sh
+
+source kms-ddl.sql;
+source kms-dml.sql;

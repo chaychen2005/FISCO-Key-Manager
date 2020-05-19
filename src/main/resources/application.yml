@@ -1,0 +1,40 @@
+#server config
+server:
+  port: servicePort
+  ssl:
+    key-store: classpath:server.keystore
+    key-alias: kms
+    enabled: true
+    key-store-password: 123456
+    key-store-type: JKS
+  servlet:
+    context-path: /FISCO-Key-Manager
+
+
+#mybatis config
+mybatis:
+  typeAliasesPackage: org.fisco.bcos.key.mgr
+  mapperLocations: classpath:mapper/*.xml
+
+
+# database connection configuration
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://dbIP:dbPort/fisco_key_manager?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: "defaultAccount"
+    password: "defaultPassword"
+
+#log config
+logging:
+  config: classpath:log/log4j2.xml
+  level:
+    org.fisco.bcos.key.mgr: info
+
+#constants
+constant:
+  ###http request
+  isUseSecurity: true   # login's authorization
+  authTokenMaxAge: 1800
+
+
