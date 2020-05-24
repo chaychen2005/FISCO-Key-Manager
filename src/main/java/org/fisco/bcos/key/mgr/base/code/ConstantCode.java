@@ -68,13 +68,15 @@ public class ConstantCode {
 
     public static final RetCode INVALID_PASSWORD_FORMAT = RetCode.mark(200109, "invalid password format. password should be between 6 and 20 in length, and contain only characters, numbers, and underscores");
 
+    public static final RetCode LACK_ACCESS_ACCOUNT = RetCode.mark(200110, "lack of access to the account");
+
     public static final RetCode KEY_EXISTS = RetCode.mark(200200, "key info already exists");
 
     public static final RetCode KEY_NOT_EXISTS = RetCode.mark(200201, "key info not exists");
 
     public static final RetCode KEY_ALIASES_EMPTY = RetCode.mark(200202, "key aliases empty");
 
-    public static final RetCode LACK_ACCESS = RetCode.mark(200203, "lack of access to the key");
+    public static final RetCode LACK_ACCESS_KEY = RetCode.mark(200203, "lack of access to the key");
 
     public static final RetCode INVALID_TOKEN = RetCode.mark(200300, "invalid token");
 

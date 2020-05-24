@@ -632,6 +632,7 @@
 | 200107 | the new password cannot be same as old | business exception - account  | 新旧密码不能一致      |
 | 200108 | role id cannot be empty                | business exception - account  | 角色标识不能为空      |
 | 200109 | invalid role id                        | business exception - account  | 无效的角色标识        |
+| 200110 | lack of access to the account          | business exception - account  | 无访问该账号权限      |
 | 200200 | key info already exists                | business exception - key      | 该私钥已托管          |
 | 200201 | key info not exists                    | business exception - key      | 该私钥未托管          |
 | 200202 | key aliases empty                      | business exception - key      | 私钥标识不能为空      |

@@ -101,7 +101,7 @@ public class KeyEscrowController extends BaseController {
             TbAccountInfo tbCurAccount = accountService.queryByAccount(account);
             if (tbCurAccount == null || !currentAccount.equals(tbCurAccount.getCreator())) {
                 log.info("lack of access to the key");
-                throw new KeyMgrException(ConstantCode.LACK_ACCESS);
+                throw new KeyMgrException(ConstantCode.LACK_ACCESS_KEY);
             }
         }
 
@@ -162,7 +162,7 @@ public class KeyEscrowController extends BaseController {
             TbAccountInfo tbCurAccount = accountService.queryByAccount(account);
             if (tbCurAccount == null || !currentAccount.equals(tbCurAccount.getCreator())) {
                 log.info("lack of access to the key");
-                throw new KeyMgrException(ConstantCode.LACK_ACCESS);
+                throw new KeyMgrException(ConstantCode.LACK_ACCESS_KEY);
             }
         }
 

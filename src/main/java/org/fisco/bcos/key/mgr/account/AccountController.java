@@ -148,7 +148,7 @@ public class AccountController extends BaseController {
         TbAccountInfo tbCurAccount = accountService.queryByAccount(account);
         if (currentAccount == account || tbCurAccount == null || !currentAccount.equals(tbCurAccount.getCreator())) {
             log.info("lack of access to delete account");
-            throw new KeyMgrException(ConstantCode.LACK_ACCESS);
+            throw new KeyMgrException(ConstantCode.LACK_ACCESS_ACCOUNT);
         }
 
         accountService.deleteAccountRow(account);
